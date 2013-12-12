@@ -1,0 +1,88 @@
+﻿<Window x:Class="FireKeys.Suggestions.SuggestionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
+        xmlns:converters="clr-namespace:FireKeys.Converters" 
+        xmlns:suggestions="clr-namespace:FireKeys.Suggestions"
+        Title="FireKeys Suggestions" Height="400" Width="600" Icon="/FireKeys;component/Resources/FireKeysIcon.ico">
+    
+    <Window.DataContext>
+        <suggestions:SuggestionsViewModel x:Name="viewModel" />
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <converters:Win32IconHandleToImageSourceConverter x:Key="Win32IconHandleToImageSourceConverter" />
+    </Window.Resources>
+    
+    <apexControls:ApexGrid Rows="Auto,*,Auto">
+
+        <!-- Top block of color. -->
+        <apexControls:MultiBorder Grid.Row="0" Background="#FFFFFF">
+
+            <apexControls:ApexGrid Rows="Auto,Auto" VerticalAlignment="Center" Margin="12">
+                <TextBlock Grid.Row="0" FontWeight="Light" Text="Suggestions" FontSize="24" />
+                <TextBlock Grid.Row="1" Margin="12,0,0,0" TextWrapping="Wrap" FontSize="12">
+                    The suggestions below have been made based on what is installed on your system. Choose which suggestions you want to apply 
+                    then press OK to add them as key bindings.
+                </TextBlock>
+            </apexControls:ApexGrid>
+
+        </apexControls:MultiBorder>
+
+
+        <!-- Main content. -->
+        <apexControls:MultiBorder Grid.Row="1"
+                                  BorderThicknessTop="1" BorderBrushTop="#dadada"
+                                  BorderThicknessBottom="1" BorderBrushBottom="#b8c2d5">
+            <apexControls:MultiBorder.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#f1f1f1" />
+                    <GradientStop Offset="0.2" Color="#ffffff" />
+                    <GradientStop Offset="0.4" Color="#fbfcfe" />
+                    <GradientStop Offset="1" Color="#ccd7ec" />
+                </LinearGradientBrush>
+            </apexControls:MultiBorder.Background>
+
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <apexControls:ApexGrid Grid.Row="2" Rows="*" Margin="20">
+
+                <ItemsControl ItemsSource="{Binding Suggestions}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <apexControls:ApexGrid Columns="Auto,*,Auto">
+                                
+                                <Image Grid.Column="0" Width="32" Height="32" Margin="4"
+                                       RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                       Source="{Binding HotKeyBinding.Action.LargeIcon.Handle, 
+                                       Converter={StaticResource Win32IconHandleToImageSourceConverter}}"
+                                       ></Image>
+                                <apexControls:ApexGrid Grid.Column="1" Margin="4" Rows="Auto,Auto">
+                                <TextBlock Grid.Row="0" Text="{Binding HotKeyBinding.DisplayName}" FontWeight="Light" FontSize="22" />
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                    <TextBlock FontSize="14">Why not bind this to the hotkey </TextBlock>
+                                        <TextBlock FontSize="14" Text="{Binding HotKeyBinding.HotKey}" FontWeight="Bold" Padding="4,0,0,0" />
+                                </StackPanel>
+                                </apexControls:ApexGrid>
+                                
+                                <CheckBox Grid.Column="2" VerticalAlignment="Center" IsChecked="{Binding ApplySuggestion}">OK</CheckBox>
+
+                            </apexControls:ApexGrid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+            </apexControls:ApexGrid>
+            </ScrollViewer>
+        </apexControls:MultiBorder>
+
+        <apexControls:MultiBorder Grid.Row="2" Height="50" Background="#ccd7ec"
+                                  BorderThicknessTop="1" BorderBrushTop="#dce3f2" Padding="20,0,20,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Command="{Binding OKCommand}" Margin="0,0,8,0" Width="80" Height="24" Content="OK" HorizontalAlignment="Right" IsDefault="True" />
+                <Button Command="{Binding CancelCommand}" Width="80" Height="24" Content="Cancel" HorizontalAlignment="Right" />
+            </StackPanel>
+        </apexControls:MultiBorder>
+
+    </apexControls:ApexGrid>
+    
+</Window>

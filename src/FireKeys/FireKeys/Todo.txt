@@ -1,0 +1,44 @@
+﻿vNext
+=====
+
+* Allow preferred window to be set
+* Allow focus window to be set
+* Use Shell Folder Icon if possible.
+* Enable/Disable in UI.
+
+Re-usable
+=========
+
+* Application auto startup manager.
+* Single instance application.
+* Converters
+
+Version 1.0
+===========
+
+DONE: If there are no bindings, offer 'suggestions' in the context menu.
+DONE: Way to fire off suggestions dialog.
+DONE: Must be able to select keys with the keyboard easily.
+DONE: Delete doesn't work
+DONE: Changes in the form must be reflected in the context menu.
+DONE: Need program icons.
+DONE: Icons must be high quality (via pinvoke shell, maybe update SharpShell for this)
+DONE: Display names should be used for the context menu.
+DONE: Enable hotkey for program plus arguments.
+DONE: Subtext on dialogs for more information.
+DONE: Create a configuration wizard that sets common hotkeys:
+  Chrome
+  Firefox
+  Internet Explorer
+  Notepad
+  Notepad++
+DONE: Windows 8 modifiers bug.
+DONE: Support serialization of the new bindings.
+DONE: Offer hotkey to open a folder.
+DONE: Offer hotkey to open a URL.
+DONE: Deal with situation when hotkey is not set.
+DONE: Create icon for website.
+DONE: Display name should be suggested by plugins.
+DONE: Display name must be settable.
+DONE: Popup balloon if there are no keys defined.
+DONE: Hot key modifiers should only de-activate with a keyup of the modifier.

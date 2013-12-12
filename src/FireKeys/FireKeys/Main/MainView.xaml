@@ -1,0 +1,123 @@
+﻿<UserControl x:Class="FireKeys.Main.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:FireKeys.Converters"
+             xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
+             xmlns:main="clr-namespace:FireKeys.Main"
+             xmlns:apexConverters="clr-namespace:Apex.Converters;assembly=Apex"
+             mc:Ignorable="d" 
+             d:DesignHeight="480" d:DesignWidth="640">
+    <UserControl.DataContext>
+        <main:MainViewModel x:Name="viewModel" />
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <converters:Win32IconHandleToImageSourceConverter x:Key="Win32IconHandleToImageSourceConverter" />
+        <apexConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <apexControls:ApexGrid Rows="Auto,*,Auto">
+
+        <!-- Top block of color. -->
+        <apexControls:MultiBorder Grid.Row="0" Background="#FFFFFF">
+
+            <apexControls:ApexGrid Rows="Auto,Auto" VerticalAlignment="Center" Margin="12">
+                <TextBlock Grid.Row="0" FontWeight="Light" Text="FireKeys" FontSize="24" />
+                <TextBlock Grid.Row="1" Margin="12,0,0,0" TextWrapping="Wrap" FontSize="12">
+                    <Run>Configure your hot key bindings below. FireKeys can also offer</Run>
+                    <Hyperlink Command="{Binding ShowSuggestionsCommand}">suggestions</Hyperlink>
+                    <Run>specifically for the programs you have installed.</Run>
+                </TextBlock>
+            </apexControls:ApexGrid>
+
+        </apexControls:MultiBorder>
+
+
+        <!-- Main content. -->
+        <apexControls:MultiBorder Grid.Row="1"
+                                  BorderThicknessTop="1" BorderBrushTop="#dadada"
+                                  BorderThicknessBottom="1" BorderBrushBottom="#b8c2d5">
+            <apexControls:MultiBorder.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#f1f1f1" />
+                    <GradientStop Offset="0.2" Color="#ffffff" />
+                    <GradientStop Offset="0.4" Color="#fbfcfe" />
+                    <GradientStop Offset="1" Color="#ccd7ec" />
+                </LinearGradientBrush>
+            </apexControls:MultiBorder.Background>
+
+            <Grid>
+                
+            <!-- The set of key bindings, only shown if there are any. -->
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto"
+                          Visibility="{Binding IsHotKeyBindingsCollectionEmpty,
+                Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}">
+                <apexControls:ApexGrid Grid.Row="2" Rows="*" Margin="20">
+
+                    <ItemsControl ItemsSource="{Binding HotKeyBindings}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <apexControls:ApexGrid Columns="Auto,*,Auto">
+
+                                    <Image Grid.Column="0" Width="32" Height="32" Margin="4"
+                                       RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                       Source="{Binding HotKeyBinding.Action.LargeIcon.Handle, 
+                                       Converter={StaticResource Win32IconHandleToImageSourceConverter}}"
+                                       ></Image>
+                                    <apexControls:ApexGrid Grid.Column="1" Margin="4" Rows="Auto,Auto,Auto">
+                                        <TextBlock Grid.Row="0" Text="{Binding HotKeyBinding.DisplayName}" FontWeight="Light" FontSize="22" />
+                                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                            <TextBlock FontSize="14">Bound to</TextBlock>
+                                            <TextBlock FontSize="14" Text="{Binding HotKeyBinding.HotKey}" FontWeight="Bold" Padding="4,0,0,0" />
+                                        </StackPanel>
+                                            <TextBlock Grid.Row="2" FontSize="14" Foreground="Red" TextWrapping="Wrap"
+                                                       Visibility="{Binding ErrorSettingBinding, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                There was a problem setting this hotkey. This might be because it is already being used 
+                                                by another application. Try using another hotkey combination.
+                                            </TextBlock>
+                                    </apexControls:ApexGrid>
+
+                                    <!-- TODO, tidy up commands etc. -->
+                                    <StackPanel Grid.Column="2">
+                                        <Button Command="{Binding ElementName=viewModel, Path=DeleteHotKeyBindingCommand}"
+                                                CommandParameter="{Binding}">Delete</Button>
+                                    </StackPanel>
+
+                                </apexControls:ApexGrid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </apexControls:ApexGrid>
+            </ScrollViewer>
+
+
+            <!-- The set of key bindings, only shown if there are any. -->
+            <apexControls:ApexGrid Grid.Row="2" Visibility="{Binding IsHotKeyBindingsCollectionEmpty,
+                Converter={StaticResource BooleanToVisibilityConverter}}">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="20">
+                    <Run>You have no hot key bindings set. Why not see FireKey's </Run>
+                    <Hyperlink Command="{Binding ShowSuggestionsCommand}">suggestions</Hyperlink>
+                    <Run>or</Run>
+                    <Hyperlink Command="{Binding NewCommand}">add a new hot key binding</Hyperlink>
+                    <Run>now?</Run>
+                </TextBlock>
+            </apexControls:ApexGrid>
+            
+            </Grid>
+
+        </apexControls:MultiBorder>
+
+        <apexControls:MultiBorder Grid.Row="2" Height="50" Background="#ccd7ec"
+                                  BorderThicknessTop="1" BorderBrushTop="#dce3f2" Padding="20,0,20,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Command="{Binding NewCommand}" Margin="0,0,8,0" Width="80" Height="24" Content="New..." HorizontalAlignment="Right" IsDefault="True" />
+                <Button Command="{Binding CloseCommand}" Width="80" Height="24" Content="Close" HorizontalAlignment="Right" />
+            </StackPanel>
+        </apexControls:MultiBorder>
+
+    </apexControls:ApexGrid>
+
+</UserControl>

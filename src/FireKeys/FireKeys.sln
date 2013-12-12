@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireKeys", "FireKeys\FireKeys.csproj", "{13AF8647-606E-498D-998C-9B24471AE8A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireKeysAPI", "FireKeysAPI\FireKeysAPI.csproj", "{0655983D-36FD-43D9-A002-D46223DE26CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{41D3AE9A-0030-4E88-AD38-05533BCE9646}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Shared", "0. Shared", "{C3FE7A78-F8B3-4B8D-8532-E50B69377ABE}"
+	ProjectSection(SolutionItems) = preProject
+		Shared\SharedAssemblyInfo.cs = Shared\SharedAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. API", "1. API", "{D39B2817-225B-4E81-A6A8-7DBDCB26792A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Client", "2. Client", "{8A29CD29-7595-4AA4-B5D0-992EF78EE8F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13AF8647-606E-498D-998C-9B24471AE8A9}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{13AF8647-606E-498D-998C-9B24471AE8A9}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{13AF8647-606E-498D-998C-9B24471AE8A9}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{13AF8647-606E-498D-998C-9B24471AE8A9}.Debug|x86.ActiveCfg = Debug|x86
+		{13AF8647-606E-498D-998C-9B24471AE8A9}.Debug|x86.Build.0 = Debug|x86
+		{13AF8647-606E-498D-998C-9B24471AE8A9}.Release|Any CPU.ActiveCfg = Release|x86
+		{13AF8647-606E-498D-998C-9B24471AE8A9}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{13AF8647-606E-498D-998C-9B24471AE8A9}.Release|Mixed Platforms.Build.0 = Release|x86
+		{13AF8647-606E-498D-998C-9B24471AE8A9}.Release|x86.ActiveCfg = Release|x86
+		{13AF8647-606E-498D-998C-9B24471AE8A9}.Release|x86.Build.0 = Release|x86
+		{0655983D-36FD-43D9-A002-D46223DE26CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0655983D-36FD-43D9-A002-D46223DE26CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0655983D-36FD-43D9-A002-D46223DE26CB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0655983D-36FD-43D9-A002-D46223DE26CB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0655983D-36FD-43D9-A002-D46223DE26CB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0655983D-36FD-43D9-A002-D46223DE26CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0655983D-36FD-43D9-A002-D46223DE26CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0655983D-36FD-43D9-A002-D46223DE26CB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0655983D-36FD-43D9-A002-D46223DE26CB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0655983D-36FD-43D9-A002-D46223DE26CB}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0655983D-36FD-43D9-A002-D46223DE26CB} = {D39B2817-225B-4E81-A6A8-7DBDCB26792A}
+		{13AF8647-606E-498D-998C-9B24471AE8A9} = {8A29CD29-7595-4AA4-B5D0-992EF78EE8F8}
+	EndGlobalSection
+EndGlobal

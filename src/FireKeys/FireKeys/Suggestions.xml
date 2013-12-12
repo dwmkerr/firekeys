@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<ArrayOfBindingSuggestion xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BindingSuggestion>
+    <DisplayName>Google Chrome</DisplayName>
+    <CheckSuggestionPaths>
+      <string>%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe</string>
+      <string>%programfiles(x86)%\Google\Chrome\Application\chrome.exe</string>
+      <string>%programfiles%\Google\Chrome\Application\chrome.exe</string>
+    </CheckSuggestionPaths>
+    <HotKey>
+      <HotKeyCharacter>C</HotKeyCharacter>
+      <Modifiers>Windows Control</Modifiers>
+    </HotKey>
+  </BindingSuggestion>
+
+  <BindingSuggestion>
+    <DisplayName>Notepad</DisplayName>
+    <CheckSuggestionPaths>
+      <string>%windir%\notepad.exe</string>
+    </CheckSuggestionPaths>
+    <HotKey>
+      <HotKeyCharacter>N</HotKeyCharacter>
+      <Modifiers>Windows</Modifiers>
+    </HotKey>
+  </BindingSuggestion>
+  
+  <BindingSuggestion>
+    <DisplayName>Notepad++</DisplayName>
+    <CheckSuggestionPaths>
+      <string>%programfiles(x86)%\notepad++\notepad++.exe</string>
+      <string>%programfiles%\notepad++\notepad++.exe</string>
+    </CheckSuggestionPaths>
+    <HotKey>
+      <HotKeyCharacter>N</HotKeyCharacter>
+      <Modifiers>Windows Control</Modifiers>
+    </HotKey>
+  </BindingSuggestion>
+
+  <BindingSuggestion>
+    <DisplayName>FireFox</DisplayName>
+    <CheckSuggestionPaths>
+      <string>%programfiles(x86)%\Mozilla Firefox\firefox.exe</string>
+      <string>%programfiles%\Mozilla Firefox\firefox.exe</string>
+    </CheckSuggestionPaths>
+    <HotKey>
+      <HotKeyCharacter>F</HotKeyCharacter>
+      <Modifiers>Windows Control</Modifiers>
+    </HotKey>
+  </BindingSuggestion>
+
+  <BindingSuggestion>
+    <DisplayName>Internet Explorer</DisplayName>
+    <CheckSuggestionPaths>
+      <string>%programfiles(x86)%\Internet Explorer\iexplore.exe</string>
+      <string>%programfiles%\Internet Explorer\iexplore.exe</string>
+    </CheckSuggestionPaths>
+    <HotKey>
+      <HotKeyCharacter>I</HotKeyCharacter>
+      <Modifiers>Windows Control</Modifiers>
+    </HotKey>
+  </BindingSuggestion>
+
+</ArrayOfBindingSuggestion>
