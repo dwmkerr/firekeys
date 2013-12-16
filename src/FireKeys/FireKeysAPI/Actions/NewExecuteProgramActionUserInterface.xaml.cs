@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -29,9 +30,22 @@ namespace FireKeysAPI.Actions
         private void PathTextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
             //  If we've got a file name, suggest it as the action name.
-            var fileName = System.IO.Path.GetFileNameWithoutExtension(textBoxPath.Text);
-            if(!string.IsNullOrEmpty(fileName) && NewActionUserInterface != null)
-                NewActionUserInterface.SetSuggestedDisplayName(fileName);
+            var suggested = GetSuggestedDisplayNameFromPath(textBoxPath.Text);
+            if(!string.IsNullOrEmpty(suggested) && NewActionUserInterface != null)
+                NewActionUserInterface.SetSuggestedDisplayName(suggested);
+        }
+
+        private string GetSuggestedDisplayNameFromPath(string path)
+        {
+            //  File.Exists returns false for invalid paths, so we can check if the file
+            //  exists, if it does we can use it's name.
+            if (File.Exists(path))
+                return System.IO.Path.GetFileNameWithoutExtension(path);
+            return null;
+        }
+
+        private void folderBoxWorkingDirectory_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
         }
     }

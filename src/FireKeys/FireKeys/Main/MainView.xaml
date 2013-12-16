@@ -113,8 +113,8 @@
         <apexControls:MultiBorder Grid.Row="2" Height="50" Background="#ccd7ec"
                                   BorderThicknessTop="1" BorderBrushTop="#dce3f2" Padding="20,0,20,0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Command="{Binding NewCommand}" Margin="0,0,8,0" Width="80" Height="24" Content="New..." HorizontalAlignment="Right" IsDefault="True" />
-                <Button Command="{Binding CloseCommand}" Width="80" Height="24" Content="Close" HorizontalAlignment="Right" />
+                <Button Command="{Binding NewCommand}" Margin="0,0,8,0" Width="80" Height="24" Content="_New..." HorizontalAlignment="Right" IsDefault="True" />
+                <Button Command="{Binding CloseCommand}" Width="80" Height="24" Content="_Close" HorizontalAlignment="Right" />
             </StackPanel>
         </apexControls:MultiBorder>
 

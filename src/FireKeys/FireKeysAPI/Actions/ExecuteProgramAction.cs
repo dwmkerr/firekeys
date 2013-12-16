@@ -25,7 +25,8 @@ namespace FireKeysAPI.Actions
                     StartInfo = new ProcessStartInfo
                     {
                         FileName = Program,
-                        Arguments = Arguments
+                        Arguments = Arguments,
+                        WorkingDirectory = WorkingDirectory
                     }
                 };
                 process.Start();
@@ -109,6 +110,14 @@ namespace FireKeysAPI.Actions
         /// The arguments.
         /// </value>
         public string Arguments { get; set; }
+
+        /// <summary>
+        /// Gets or sets the working directory.
+        /// </summary>
+        /// <value>
+        /// The working directory.
+        /// </value>
+        public string WorkingDirectory { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to try and focus the application window.

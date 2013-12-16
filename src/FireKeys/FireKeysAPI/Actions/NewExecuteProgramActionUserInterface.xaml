@@ -6,13 +6,17 @@
              xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex" mc:Ignorable="d" 
              d:DesignHeight="120" d:DesignWidth="600">
 
-    <apexControls:PaddedGrid Padding="4" Grid.Row="2" Rows="Auto,Auto" Columns="*,2*">
+    <apexControls:PaddedGrid Padding="4" Grid.Row="2" Rows="Auto,Auto,Auto" Columns="*,2*">
 
         <Label Grid.Row="0" Grid.Column="0" Content="_Program" FontSize="14" />
         <apexControls:PathTextBox x:Name="textBoxPath" Grid.Row="0" Grid.Column="1" Text="{Binding Program, UpdateSourceTrigger=PropertyChanged}" TextChanged="PathTextBox_TextChanged_1" FontSize="14" />
 
         <Label Grid.Row="1" Grid.Column="0" Content="_Arguments" FontSize="14" />
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Arguments}" FontSize="14" />
-        
+
+        <Label Grid.Row="2" Grid.Column="0" Content="_Working Directory" FontSize="14" />
+        <apexControls:FolderTextBox x:Name="folderBoxWorkingDirectory" Grid.Row="2" Grid.Column="1" Text="{Binding WorkingDirectory, UpdateSourceTrigger=PropertyChanged}"
+                                    FontSize="14" />
+
     </apexControls:PaddedGrid>
 </UserControl>
