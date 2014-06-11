@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
+using System.Windows.Documents;
 
 namespace FireKeys.Main
 {
@@ -11,18 +13,7 @@ namespace FireKeys.Main
         {
             InitializeComponent();
 
-            mainView.ViewModel.NewCommand.Executed += NewCommand_Executed;
             mainView.ViewModel.CloseCommand.Executed += (sender, args) => Close();
-        }
-
-        void NewCommand_Executed(object sender, Apex.MVVM.CommandEventArgs args)
-        {
-            var window = new NewHotKeyBinding.NewHotKeyBindingWindow();
-            if (window.ShowDialog() == true)
-            {
-                FireKeysApplication.Instance.HotKeyBindings.Add(window.HotKeyBinding);
-                FireKeysApplication.Instance.SaveSettings();
-            }
         }
     }
 }

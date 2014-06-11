@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
-             mc:Ignorable="d" 
-             d:DesignHeight="24" d:DesignWidth="300">
-
+             xmlns:controls="clr-namespace:FireKeys.Controls"
+             xmlns:newHotKeyBinding="clr-namespace:FireKeys.NewHotKeyBinding"
+             mc:Ignorable="d" Height="auto" Width="300" Name="ModifiersControl" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <UserControl.Resources>
+        <controls:KeyValueConverter x:Key="KeyConverter"></controls:KeyValueConverter>
         <Style x:Key="ButtonFocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -62,16 +63,26 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
     </UserControl.Resources>
 
-    <apexControls:PaddedGrid Columns="Auto,Auto,Auto,Auto,*" Padding="2">
+    <apexControls:PaddedGrid Padding="2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ItemsControl Grid.Column="0" ItemsSource="{Binding HotKey.ModifierSelections}" HorizontalAlignment="Left">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"></StackPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ToggleButton  Margin="1,0,1,0" Content="{Binding HotKeyModifier}" IsChecked="{Binding Selected}"></ToggleButton>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <TextBox Grid.Column="1" x:Name="TextBoxHotKey" Margin="40,0,0,0" Text="{Binding HotKey.HotKey.HotKeyCharacter, Converter={StaticResource KeyConverter}, UpdateSourceTrigger=PropertyChanged}" MaxLength="1"/>
 
-        <ToggleButton x:Name="checkBoxCtrl" Grid.Column="0" Unchecked="OnModiferCheckChanged" Checked="OnModiferCheckChanged">Ctrl</ToggleButton>
-        <ToggleButton x:Name="checkBoxAlt" Grid.Column="1" Unchecked="OnModiferCheckChanged" Checked="OnModiferCheckChanged">Alt</ToggleButton>
-        <ToggleButton x:Name="checkBoxShift" Grid.Column="2" Unchecked="OnModiferCheckChanged" Checked="OnModiferCheckChanged">Shift</ToggleButton>
-        <ToggleButton x:Name="checkBoxWin" Grid.Column="3" Unchecked="OnModiferCheckChanged" Checked="OnModiferCheckChanged">Win</ToggleButton>
-        <TextBox x:Name="textBoxHotKey" Grid.Column="4" KeyDown="TextBoxHotKey_OnKeyDown" KeyUp="TextBoxHotKey_OnKeyUp"></TextBox>
-        
     </apexControls:PaddedGrid>
 </UserControl>

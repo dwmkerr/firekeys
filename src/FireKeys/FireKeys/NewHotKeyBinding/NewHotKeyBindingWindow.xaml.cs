@@ -9,10 +9,13 @@ namespace FireKeys.NewHotKeyBinding
     /// </summary>
     public partial class NewHotKeyBindingWindow : Window
     {
-        public NewHotKeyBindingWindow()
+        public NewHotKeyBindingWindow(NewHotKeyBindingViewModel vm = null)
         {
             InitializeComponent();
-
+            if (vm != null)
+            {
+                newHotKeyBindingView.ViewModel = vm;
+            }
             newHotKeyBindingView.ViewModel.OKCommand.Executed += (sender, args) =>
                 {
                     DialogResult = true;

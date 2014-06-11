@@ -8,9 +8,9 @@
              xmlns:newHotKeyBinding="clr-namespace:FireKeys.NewHotKeyBinding"
              xmlns:controls="clr-namespace:FireKeys.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="480" d:DesignWidth="640">
+             d:DesignHeight="480" d:DesignWidth="640" Name="ParentControl">
     <UserControl.DataContext>
-        <newHotKeyBinding:NewHotKeyBindingViewModel />
+        <newHotKeyBinding:NewHotKeyBindingViewModel/>
     </UserControl.DataContext>
 
     <UserControl.Resources>
@@ -47,7 +47,7 @@
 
             <apexControls:ApexGrid Grid.Row="2" Rows="Auto,Auto,Auto" VerticalAlignment="Center" Margin="20">
 
-                <apexControls:PaddedGrid Grid.Row="0" Padding="4" Rows="Auto" Columns="*,2*">
+                <apexControls:PaddedGrid Grid.Row="0" Padding="4" Rows="Auto" Columns="auto,3*">
 
                     <Label Grid.Row="0" Grid.Column="0" Content="_Action" FontSize="14" />
                     <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Actions}" SelectedItem="{Binding SelectedAction}" FontSize="14">
@@ -62,11 +62,11 @@
                 
                 <ContentPresenter Grid.Row="1" Content="{Binding SelectedActionUserInterface}" />
 
-                <apexControls:PaddedGrid Grid.Row="2" Padding="4" Rows="Auto,Auto" Columns="*,2*" VerticalAlignment="Center">
+                <apexControls:PaddedGrid Grid.Row="2" Padding="4" Rows="Auto,Auto" Columns="auto,*" VerticalAlignment="Center">
 
     
                     <Label Grid.Row="0" Grid.Column="0" Content="_Hotkey" FontSize="14" />
-                    <controls:HotKeyControl Grid.Row="0" Grid.Column="1" HotKey="{Binding HotKey}" FontSize="14"  />
+                    <controls:HotKeyControl Grid.Row="0" Grid.Column="1" FontSize="14" Width="auto" HotKey="{Binding Path=DataContext, ElementName=ParentControl}" x:Name="HotKeyData" />
 
                     <Label Grid.Row="1" Grid.Column="0" Content="_Display Name" FontSize="14" />
                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding DisplayName}" FontSize="14" />

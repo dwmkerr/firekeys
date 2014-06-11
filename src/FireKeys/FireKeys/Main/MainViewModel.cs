@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Documents;
 using System.Windows.Forms;
 using Apex.MVVM;
+using FireKeys.NewHotKeyBinding;
 using FireKeysAPI;
 
 namespace FireKeys.Main
@@ -15,6 +17,7 @@ namespace FireKeys.Main
             NewCommand = new Command(DoNewCommand);
             DeleteHotKeyBindingCommand = new Command(DoDeleteHotKeyBindingCommand);
             ShowSuggestionsCommand = new Command(DoShowSuggestionsCommand);
+            EditHotKeyBindingCommand = new Command(DoEditCommand);
 
             UpdateHotHeyBindings();
 
@@ -80,6 +83,38 @@ namespace FireKeys.Main
         /// <param name="parameter">The New command parameter.</param>
         private void DoNewCommand(object parameter)
         {
+            var window = new NewHotKeyBinding.NewHotKeyBindingWindow();
+            if (window.ShowDialog() == true)
+            {
+                FireKeysApplication.Instance.HotKeyBindings.Add(window.HotKeyBinding);
+                FireKeysApplication.Instance.SaveSettings();
+            }
+        }
+
+        /// <summary>
+        /// Performs the Edit command.
+        /// </summary>
+        /// <param name="parameter">The edit command parameter.</param>
+        private void DoEditCommand(object parameter)
+        {
+            var binding = parameter as HotKeyBindingViewModel;
+            if (binding != null)
+            {
+                var model = new NewHotKeyBindingViewModel(binding.Model.HotKey)
+                                                {
+                                                    DisplayName = binding.Model.DisplayName,
+                                                    SelectedAction = binding.Model.Action
+                                                };
+                model.Actions.Clear();
+                model.Actions.Add(binding.Model.Action);
+                var window = new NewHotKeyBindingWindow(model);
+
+                if (window.ShowDialog() == true)
+                {
+                    binding.HotKeyBinding = window.HotKeyBinding;
+                    FireKeysApplication.Instance.SaveSettings();
+                }
+            }
         }
 
         /// <summary>
@@ -111,6 +146,16 @@ namespace FireKeys.Main
         /// </summary>
         /// <value>The value of .</value>
         public Command DeleteHotKeyBindingCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the EditHotKeyBinding command.
+        /// </summary>
+        /// <value>The value of .</value>
+        public Command EditHotKeyBindingCommand
         {
             get;
             private set;

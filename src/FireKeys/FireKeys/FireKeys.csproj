@@ -110,6 +110,9 @@
       <DependentUpon>HotKeyControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\Win32IconHandleToImageSourceConverter.cs" />
+    <Compile Include="HotkeyEnabledContextMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="NewHotKeyBinding\NewHotKeyBindingView.xaml.cs">
       <DependentUpon>NewHotKeyBindingView.xaml</DependentUpon>
     </Compile>
@@ -126,16 +129,8 @@
     </Compile>
     <Compile Include="Main\HotKeyBindingViewModel.cs" />
     <Compile Include="FireKeysApplication.cs" />
-    <Compile Include="HotKeyControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="HotKeyControl.Designer.cs">
-      <DependentUpon>HotKeyControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="HotkeyEnabledContextMenuStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Suggestions\SuggestionViewModel.cs" />
@@ -143,9 +138,6 @@
     <Compile Include="Suggestions\SuggestionsWindow.xaml.cs">
       <DependentUpon>SuggestionsWindow.xaml</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="HotKeyControl.resx">
-      <DependentUpon>HotKeyControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
