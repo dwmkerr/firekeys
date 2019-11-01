@@ -28,9 +28,11 @@ namespace FireKeysAPI.Actions
 
         private void textBoxFolder_TextChanged_1(object sender, TextChangedEventArgs e)
         {
-
+            var safePath = System.IO.Path.GetInvalidPathChars()
+                .Aggregate(textBoxFolder.Text, (prev, invalidChar) => prev.Replace(invalidChar.ToString(), string.Empty));
+            textBoxFolder.Text = safePath;
             //  If we've got a file name, suggest it as the action name.
-            var fileName = System.IO.Path.GetFileNameWithoutExtension(textBoxFolder.Text);
+            var fileName = System.IO.Path.GetFileNameWithoutExtension(safePath);
             if (!string.IsNullOrEmpty(fileName) && NewActionUserInterface != null)
                 NewActionUserInterface.SetSuggestedDisplayName(fileName);
         }

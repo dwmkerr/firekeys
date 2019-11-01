@@ -1,10 +1,13 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using Apex.MVVM;
+using FireKeys.Controls;
 using FireKeysAPI;
 using FireKeysAPI.Actions;
 
@@ -13,16 +16,44 @@ namespace FireKeys.NewHotKeyBinding
     [ViewModel]
     public class NewHotKeyBindingViewModel : ViewModel, INewActionUserInterface
     {
-        public NewHotKeyBindingViewModel()
+        private readonly ObservableCollection<HotKeyModifierSelection> _modifierSelections = new ObservableCollection<HotKeyModifierSelection>();
+        public ObservableCollection<HotKeyModifierSelection> ModifierSelections { get { return _modifierSelections; } }
+
+        public HotKeyModifiers ModifiersEnum
         {
+            get
+            {
+                return ModifierSelections.Where(ms => ms.Selected).Aggregate(HotKeyModifiers.None, (e, ms) => e |= ms.HotKeyModifier);
+            }
+        }
+
+        public NewHotKeyBindingViewModel() : this(new HotKey())
+        {
+            
+        }
+        public NewHotKeyBindingViewModel(HotKey hotkey)
+        {
+            HotKey = hotkey;
             OKCommand = new Command(DoOKCommand, false);
             CancelCommand = new Command(DoCancelCommand);
-            HotKey = new HotKey();
 
             CreateActions();
 
             //  Select the create program action.
             SelectedAction = Actions.Single(a => a is ExecuteProgramAction);
+
+            Enum.GetValues(typeof (HotKeyModifiers)).OfType<HotKeyModifiers>().Where(e => e != HotKeyModifiers.None)
+                .Select(e => new HotKeyModifierSelection
+                             {
+                                 Selected = HotKey.Modifiers.HasFlag(e),
+                                 HotKeyModifier = e
+                             })
+                .ToList().ForEach(ms => _modifierSelections.Add(ms));
+
+            ModifierSelections.ToList().ForEach(ms=>ms.PropertyChanged += (s, ea) =>
+                                                                          {
+                                                                              HotKey.Modifiers = ModifiersEnum;
+                                                                          });
         }
 
         private void CreateActions()
@@ -50,7 +81,11 @@ namespace FireKeys.NewHotKeyBinding
         public HotKey HotKey
         {
             get { return (HotKey)GetValue(HotKeyProperty); }
-            set { SetValue(HotKeyProperty, value); }
+            set
+            {
+                SetValue(HotKeyProperty, value);
+                ModifierSelections.ToList().ForEach(ms => ms.Selected = value.Modifiers.HasFlag(ms.HotKeyModifier));
+            }
         }
 
         
@@ -170,6 +205,31 @@ namespace FireKeys.NewHotKeyBinding
         public void SetSuggestedDisplayName(string suggestedDisplayName)
         {
             DisplayName = suggestedDisplayName;
+        }
+
+        public class HotKeyModifierSelection : INotifyPropertyChanged
+        {
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            protected virtual void OnPropertyChanged(string propertyName)
+            {
+                PropertyChangedEventHandler handler = PropertyChanged;
+                if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+
+            public HotKeyModifiers HotKeyModifier { get; set; }
+
+            private bool _selected;
+
+            public bool Selected
+            {
+                get { return _selected; }
+                set
+                {
+                    _selected = value;
+                    OnPropertyChanged("Selected");
+                }
+            }
         }
     }
 }

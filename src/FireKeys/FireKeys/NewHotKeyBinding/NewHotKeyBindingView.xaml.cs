@@ -31,7 +31,14 @@ namespace FireKeys.NewHotKeyBinding
         /// <value>
         /// The view model.
         /// </value>
-        public NewHotKeyBindingViewModel ViewModel { get { return (NewHotKeyBindingViewModel) DataContext; } }
+        public NewHotKeyBindingViewModel ViewModel
+        {
+            get { return (NewHotKeyBindingViewModel) DataContext; }
+            set
+            {
+                DataContext = value;
+            }
+        }
 
     }
 }

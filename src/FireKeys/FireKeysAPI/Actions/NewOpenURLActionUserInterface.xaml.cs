@@ -32,10 +32,13 @@ namespace FireKeysAPI.Actions
             {
                 if (!string.IsNullOrEmpty(textBoxUrl.Text))
                 {
-                    var uri = new Uri(textBoxUrl.Text);
-                    if (!string.IsNullOrEmpty(uri.Host) && NewActionUserInterface != null)
+                    Uri uri;
+                    if (Uri.TryCreate(textBoxUrl.Text, UriKind.Absolute, out uri))
                     {
-                        NewActionUserInterface.SetSuggestedDisplayName(uri.Host);
+                        if (!string.IsNullOrEmpty(uri.Host) && NewActionUserInterface != null)
+                        {
+                            NewActionUserInterface.SetSuggestedDisplayName(uri.Host);
+                        }
                     }
                 }
             }

@@ -81,9 +81,11 @@
 
                                     <!-- TODO, tidy up commands etc. -->
                                     <StackPanel Grid.Column="2">
+                                        <Button Command="{Binding ElementName=viewModel, Path=EditHotKeyBindingCommand}"
+                                                CommandParameter="{Binding}">Edit</Button>
                                         <Button Command="{Binding ElementName=viewModel, Path=DeleteHotKeyBindingCommand}"
                                                 CommandParameter="{Binding}">Delete</Button>
-                                    </StackPanel>
+                                        </StackPanel>
 
                                 </apexControls:ApexGrid>
                             </DataTemplate>
